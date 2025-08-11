@@ -12,3 +12,9 @@ A simple, responsive registration form built with **HTML**, **CSS**, and **JavaS
   - **Age** – Must be at least 18 years old.
 - **Error Highlighting** – Displays error messages and highlights invalid fields.
 - **Clean Design** – Styled with pure CSS.
+
+## Tech Stack
+
+- **HTML5** – For structuring the form elements.
+- **CSS3** – For styling the form, responsive layout, and hover/focus effects.
+- **JavaScript (Vanilla JS)** – For client-side form validation and error handling.
