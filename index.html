@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f7fa;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        .form-group.error input {
+            border-color: red;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Registration</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <!-- Name -->
+        <div class="form-group" id="name-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" style="width:450px" required>
+            <div class="error" id="name-error">Name is required.</div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group" id="email-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" style="width:450px" required>
+            <div class="error" id="email-error">Please enter a valid email address.</div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group" id="phone-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" style="width:450px" required>
+            <div class="error" id="phone-error">Please enter a valid phone number.</div>
+        </div>
+
+        <!-- Age -->
+        <div class="form-group" id="age-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age"  style="width:450px" required min="18">
+            <div class="error" id="age-error">You must be at least 18 years old to register.</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit">Register</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        // Helper function for showing and hiding errors
+        function handleError(fieldId, isValid, errorMessage) {
+            const fieldGroup = document.getElementById(fieldId + "-group");
+            const errorElement = document.getElementById(fieldId + "-error");
+
+            if (!isValid) {
+                fieldGroup.classList.add("error");
+                errorElement.style.display = "block";
+            } else {
+                fieldGroup.classList.remove("error");
+                errorElement.style.display = "none";
+            }
+
+            return isValid;
+        }
+
+        // Name Validation
+        const name = document.getElementById("name").value;
+        isValid = handleError("name", name !== "", "Name is required.") && isValid;
+
+        // Email Validation
+        const email = document.getElementById("email").value;
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        isValid = handleError("email", emailPattern.test(email), "Please enter a valid email address.") && isValid;
+
+        // Phone Validation
+        const phone = document.getElementById("phone").value;
+        const phonePattern = /^\+?[0-9]{10,14}$/;
+        isValid = handleError("phone", phonePattern.test(phone), "Please enter a valid phone number.") && isValid;
+
+        // Age Validation
+        const age = document.getElementById("age").value;
+        isValid = handleError("age", age >= 18, "You must be at least 18 years old to register.") && isValid;
+
+        return isValid;
+    }
+</script>
+
+</body>
+</html>
